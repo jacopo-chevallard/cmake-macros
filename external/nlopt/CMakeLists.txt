@@ -20,7 +20,7 @@ endif ()
 
 project (nlopt C)
 
-list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+LIST ( APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MACROS})
 
 option (WITH_CXX "enable cxx routines" OFF)
 option (BUILD_SHARED_LIBS "Build NLOPT as a shared library" ON)

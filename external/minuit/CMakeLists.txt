@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project ( minuit )
 enable_language( Fortran )
 
-LIST ( APPEND CMAKE_MODULE_PATH "${CMAKE_PARENT_SOURCE_DIR}/cmake" )
+LIST ( APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MACROS})
 
 if ( NOT RPATH_CONFIG )
   include ( General_rpath_config ) 

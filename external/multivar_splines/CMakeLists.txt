@@ -4,7 +4,7 @@ project ( MultiVar_splines )
 enable_language ( Fortran )
 
 # Set the CMAKE_MODULE_PATH
-LIST ( APPEND CMAKE_MODULE_PATH "${CMAKE_PARENT_SOURCE_DIR}/cmake" )
+LIST ( APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MACROS})
 
 # Check that when using GNU Fortran the free form flag is passed
 if ( NOT Fortran_FLAGS_ARE_SET )

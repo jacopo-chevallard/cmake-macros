@@ -15,7 +15,8 @@ ExternalProject_Add(
   SOURCE_DIR ${JSONFORTRAN_SOURCE}
   BINARY_DIR ${JSONFORTRAN_BINARY}
   INSTALL_DIR ${JSONFORTRAN_INSTALL}
-  GIT_REPOSITORY https://github.com/jacobwilliams/json-fortran
+  URL ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/archives/json-fortran-5.1.0.tar.gz
+  #GIT_REPOSITORY https://github.com/jacobwilliams/json-fortran
   CMAKE_ARGS -DCMAKE_Fortran_COMPILER=${CMAKE_Fortran_COMPILER} -DUSE_GNU_INSTALL_CONVENTION=ON -DCMAKE_Fortran_FLAGS=${CMAKE_Fortran_FLAGS} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> - DCMAKE_NO_DEFAULT_PATH=${CMAKE_NO_DEFAULT_PATH}
   )
 

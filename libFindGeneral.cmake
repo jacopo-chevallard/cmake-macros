@@ -53,19 +53,19 @@ function ( libfind_detect PREFIX )
   if ( pathargs AND libraryargs ) 
 
     if ( ${PREFIX}_INCLUDE_DIR AND ${PREFIX}_LIBRARIES )
-      set ( ${PREFIX}_FOUND TRUE PARENT_SCOPE ) 
+      set ( ${PREFIX}_FOUND TRUE CACHE INTERNAL "Flag for ${PREFIX} dependency") 
     endif ( ${PREFIX}_INCLUDE_DIR AND ${PREFIX}_LIBRARIES )
 
   elseif( pathargs )
 
     if ( ${PREFIX}_INCLUDE_DIR )
-      set ( ${PREFIX}_FOUND TRUE PARENT_SCOPE ) 
+      set ( ${PREFIX}_FOUND TRUE CACHE INTERNAL "Flag for ${PREFIX} dependency") 
     endif ( ${PREFIX}_INCLUDE_DIR )
 
   elseif( libraryargs )
 
     if ( ${PREFIX}_LIBRARIES )
-      set ( ${PREFIX}_FOUND TRUE PARENT_SCOPE ) 
+      set ( ${PREFIX}_FOUND TRUE CACHE INTERNAL "Flag for ${PREFIX} dependency") 
     endif ( ${PREFIX}_LIBRARIES )
 
   endif ( pathargs AND libraryargs ) 

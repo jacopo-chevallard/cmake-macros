@@ -28,6 +28,7 @@ ExternalProject_Add(
 set ( MCFOR_INCLUDE_DIR ${MCFOR_CMAKE_INCLUDEDIR} CACHE INTERNAL "MCFOR include directory" )
 set ( MCFOR_LIBRARIES "${MCFOR_CMAKE_LIBDIR}/${CMAKE_LIBRARY_PREFIX}${MCFOR_LIBRARY_NAME}${CMAKE_LIBRARY_SUFFIX}" CACHE INTERNAL "MCFOR library" )
 
+include(parseDependencies)
 include(Dependencies_${MCFOR_LIBRARY_NAME})
 parseDependencies(DEPENDENCIES_LIST ${Dependencies_${MCFOR_LIBRARY_NAME}})
 

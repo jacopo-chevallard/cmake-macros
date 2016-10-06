@@ -1,6 +1,11 @@
 # CMake project file for MultiVar_splines
 cmake_minimum_required ( VERSION 2.6 )
+
+# Allows to set project version
+cmake_policy(SET CMP0048 NEW)
 project ( MultiVar_splines )
+
+# Which languages do we use
 enable_language ( Fortran )
 
 # Set the CMAKE_MODULE_PATH
@@ -21,6 +26,21 @@ endif ( NOT RPATH_CONFIG )
 
 # Set library name
 set(LIBRARY_NAME multivar_splines)
+
+# Whether you build a static or shared library
+set(LIBRARY_TYPE SHARED)
+if (CMAKE_LIBRARY_TYPE)
+  set(LIBRARY_TYPE ${CMAKE_LIBRARY_TYPE})
+endif (CMAKE_LIBRARY_TYPE)
+
+# Library installation directory
+set (CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
+
+# Header files installation directory
+set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME})
+
+# Binary files installation directory
+set (CMAKE_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)
 
 # Set installation directory for *mod files
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
@@ -71,30 +91,30 @@ SET (SRC_FILES
 # Command to build the library
 add_library(
   ${LIBRARY_NAME}
-  SHARED
+  ${LIBRARY_TYPE} 
   ${SRC_FILES}
 )
 
 # install library
 install(
   TARGETS ${LIBRARY_NAME} 
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION ${CMAKE_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_LIBDIR}
 )
 
 # install header (*mod) files
 install(
   DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/ 
-  DESTINATION include/${LIBRARY_NAME}
+  DESTINATION ${CMAKE_INCLUDEDIR}
 )
 
 set_target_properties(
   ${LIBRARY_NAME}
-  PROPERTIES COMPILE_FLAGS "${CMAKE_Fortran_COMPILER_FLAGS}"
+  PROPERTIES COMPILE_FLAGS "${Fortran_FLAGS} ${CMAKE_Fortran_COMPILER_FLAGS}"
   )
 
-set ( MULTIVAR_SPLINES_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE INTERNAL "MULTIVAR_SPLINES include directory" )
-set ( MULTIVAR_SPLINES_LIBRARIES_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE INTERNAL "MULTIVAR_SPLINES library directory" )
+set ( MULTIVAR_SPLINES_INCLUDE_DIR ${CMAKE_INCLUDEDIR} CACHE INTERNAL "MULTIVAR_SPLINES include directory" )
+set ( MULTIVAR_SPLINES_LIBRARIES_DIR ${CMAKE_LIBDIR} CACHE INTERNAL "MULTIVAR_SPLINES library directory" )
 set ( MULTIVAR_SPLINES_LIBRARIES "${LIBRARY_NAME}" CACHE INTERNAL "MULTIVAR_SPLINES library" )
 
 # set the path to the library folder

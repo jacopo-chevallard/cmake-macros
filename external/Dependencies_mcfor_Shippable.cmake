@@ -1,4 +1,4 @@
-include(Dependencies_astrofortran)
+include(Dependencies_astrofortran_Shippable)
 
 set (Dependencies_mcfor
   orderpack2%lib_sorting.mod

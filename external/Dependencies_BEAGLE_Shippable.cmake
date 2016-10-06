@@ -1,4 +1,4 @@
-include(Dependencies_mcfor)
+include(Dependencies_mcfor_Shippable)
 
 set (Dependencies_BEAGLE
   multivar_splines%multivariate_splines.mod

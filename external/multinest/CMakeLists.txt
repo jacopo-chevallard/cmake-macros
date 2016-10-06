@@ -58,15 +58,17 @@ add_library(
   ${SRC_FILES}
 )
 
-libfind_detect ( OpenBLAS FIND_LIBRARY openblas LIBRARY_DIRS ${CMAKE_INSTALL_PREFIX}/lib NO_DEFAULT_PATH ${CMAKE_NO_DEFAULT_PATH} )
+if (SHIPPABLE)
+  libfind_detect (LAPACK FIND_LIBRARY lapack)
+  libfind_detect (BLAS FIND_LIBRARY blas)
+  target_link_libraries (${LIBRARY_NAME} ${LAPACK_LIBRARIES} ${BLAS_LIBRARIES})
+  link_directories(${LAPACK_LIBRARIES_DIR} ${BLAS_LIBRARIES_DIR})
+else (SHIPPABLE)
+  libfind_detect ( OpenBLAS FIND_LIBRARY openblas LIBRARY_DIRS ${CMAKE_INSTALL_PREFIX}/lib NO_DEFAULT_PATH ${CMAKE_NO_DEFAULT_PATH} )
+  target_link_libraries (${LIBRARY_NAME} ${OpenBLAS_LIBRARIES})
+  link_directories(${OpenBLAS_LIBRARIES_DIR})
+endif (SHIPPABLE)
 
-# Link the library
-target_link_libraries ( ${LIBRARY_NAME} 
-  ${OpenBLAS_LIBRARIES}
-)
-
-# Location of the libraries
-link_directories( ${OpenBLAS_LIBRARIES_DIR})
 
 # install library
 install(

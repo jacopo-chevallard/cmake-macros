@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 # Allows to set project version
 cmake_policy(SET CMP0048 NEW)
-project ( bc03_utilities )
+project ( BC03_Utilities )
 
 # Which languages do we use
 enable_language( Fortran )

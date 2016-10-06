@@ -39,7 +39,7 @@ endif (CMAKE_LIBRARY_TYPE)
 set (CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 
 # Header files installation directory
-set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/multinest)
+set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME})
 
 # Binary files installation directory
 set (CMAKE_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)

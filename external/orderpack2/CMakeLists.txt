@@ -45,7 +45,7 @@ endif (${LIBRARY_TYPE} STREQUAL "STATIC")
 set (CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 
 # Header files installation directory
-set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/orderpack2)
+set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME})
 
 # Binary files installation directory
 set (CMAKE_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)

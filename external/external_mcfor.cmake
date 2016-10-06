@@ -28,31 +28,4 @@ ExternalProject_Add(
 set ( MCFOR_INCLUDE_DIR ${MCFOR_CMAKE_INCLUDEDIR} CACHE INTERNAL "MCFOR include directory" )
 set ( MCFOR_LIBRARIES "${MCFOR_CMAKE_LIBDIR}/${CMAKE_LIBRARY_PREFIX}${MCFOR_LIBRARY_NAME}${CMAKE_LIBRARY_SUFFIX}" CACHE INTERNAL "MCFOR library" )
 
-include(parseDependencies)
-include(Dependencies_${MCFOR_LIBRARY_NAME})
-parseDependencies(DEPENDENCIES_LIST ${Dependencies_${MCFOR_LIBRARY_NAME}})
 
-foreach (dependency ${Dependencies_names_${MCFOR_LIBRARY_NAME}})
-
-  string(TOUPPER ${dependency} tmp)
-
-  # If the library cannot be found, add the compilation instructions
-  if (NOT ${tmp}_FOUND)
-
-    if (NOT TARGET EXT_${dependency})
-      include(external_${dependency})
-      string(TOUPPER ${dependency} tmp)
-      set(include_directories_list ${include_directories_list} "${${tmp}_INCLUDE_DIR}" CACHE INTERNAL "List of include directories")
-      set(target_link_libraries_list ${target_link_libraries_list} "${${tmp}_LIBRARIES}"  CACHE INTERNAL "List of libraries to be linked")
-    endif (NOT TARGET EXT_${dependency})
-
-    add_dependencies (EXT_${MCFOR_LIBRARY_NAME} EXT_${dependency})
-
-  else (NOT ${tmp}_FOUND)
-
-    set(include_directories_list ${include_directories_list} "${${tmp}_INCLUDE_DIR}" CACHE INTERNAL "List of include directories")
-    set(target_link_libraries_list ${target_link_libraries_list} "${${tmp}_LIBRARIES}" CACHE INTERNAL "List of libraries to be linked")
-
-  endif (NOT ${tmp}_FOUND)
-
-endforeach(dependency)

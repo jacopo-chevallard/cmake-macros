@@ -5,6 +5,7 @@ set (Dependencies_astrofortran
   fparser%fparser.mod
   penf%penf.mod
   fruit%fruit.mod
+  fover%fover.mod
   fftw3%fftw3.f03
   openblas
   )
@@ -16,6 +17,7 @@ set (Dependencies_names_astrofortran
   fparser
   penf
   fruit
+  fover
   fftw3
   openblas
   )

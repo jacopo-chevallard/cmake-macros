@@ -1,4 +1,4 @@
-# An external project for BLAS/FFTW
+# An external project for FFTW
 # URL http://www.fftw.org/fftw-3.3.5.tar.gz
 set ( FFTW3_PREFIX "${CMAKE_BINARY_DIR}/dependencies" )
 

@@ -47,7 +47,7 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
 
 # Source files used to build the library
 set (SRC_FILES 
-  fover.f90
+  src/fover.f90
   )
 
 # Command to build the library

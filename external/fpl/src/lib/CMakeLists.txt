@@ -1,30 +1,127 @@
-#################################################################
-# Search F90 files recursively in all subdirs
-#################################################################
+# CMake project file for fpl
+cmake_minimum_required (VERSION 2.6)
 
-FILE(GLOB_RECURSE LIB_SRC *.f90 *.F90 *.c)
-SET(LIB_SRC ${LIB_SRC} PARENT_SCOPE)
+# Allows to set project version
+cmake_policy(SET CMP0048 NEW)
+project (fpl)
 
-#################################################################
-# Library target
-#################################################################
+# Set library name
+set(LIBRARY_NAME fpl)
+
+# Which languages do we use
+enable_language (Fortran C)
+
+# Set the CMAKE_MODULE_PATH
+LIST (APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MACROS})
+LIST (APPEND CMAKE_MODULE_PATH "$ENV{CMAKE_MACROS}/external")
+
+# Set flag for Shippable CD/CI
+if (SHIPPABLE)
+  set (SHIPPABLE ON CACHE INTERNAL "Flag for Shippable CD/CI")
+  set (SHIPPABLE_SUFFIX "_Shippable" CACHE INTERNAL "Suffix for file versions tailored at working with Shippable CI/CD")
+endif (SHIPPABLE)
+
+include(ExternalProject)
+include(libFindGeneral)
+include(parseDependencies)
+
+# Probelms with RPATH
+if ( NOT RPATH_CONFIG )
+  include ( General_rpath_config ) 
+endif ( NOT RPATH_CONFIG )
+
+# Include default flags for Fortran and C compiler
+if ( NOT Fortran_FLAGS_ARE_SET )
+  if ( CMAKE_Fortran_COMPILER_ID STREQUAL GNU )
+    include( GNU_Fortran_Flags )
+  elseif ( CMAKE_Fortran_COMPILER_ID STREQUAL Intel )
+    include( Intel_Fortran_Flags )
+  endif ( CMAKE_Fortran_COMPILER_ID STREQUAL GNU )
+endif ( NOT Fortran_FLAGS_ARE_SET )
+
 # Whether you build a static or shared library
 set(LIBRARY_TYPE SHARED)
 if (CMAKE_LIBRARY_TYPE)
   set(LIBRARY_TYPE ${CMAKE_LIBRARY_TYPE})
 endif (CMAKE_LIBRARY_TYPE)
 
-ADD_LIBRARY(${LIB} ${LIBRARY_TYPE} ${LIB_SRC})
-  
+# Library installation directory
+set (CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 
-#################################################################
-# External libraries
-#################################################################
-FOREACH(EXT_LIB ${EXT_LIBS})
-    IF (${EXT_LIB}_FOUND)
-        TARGET_LINK_LIBRARIES(${LIB} ${${EXT_LIB}_LIBRARIES})
-    ENDIF()
-ENDFOREACH()
+# Header files installation directory
+set (CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${LIBRARY_NAME})
 
-SET_TARGET_PROPERTIES(${LIB} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION} SOVERSION ${${PROJECT_NAME}_SOVERSION})
+# Binary files installation directory
+set (CMAKE_BINDIR ${CMAKE_INSTALL_PREFIX}/bin)
 
+# Set installation directory for *mod files
+set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
+
+# Source files used to build the library
+#FILE(GLOB_RECURSE SRC_FILES *.f90 *.F90 *.c)
+#FILE(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/*.f90 ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/*.F90 ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/*.c)
+FILE(GLOB_RECURSE SRC_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.f90 ${CMAKE_CURRENT_SOURCE_DIR}/*.F90 ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+
+# Command to build the library
+add_library(
+  ${LIBRARY_NAME}
+  ${LIBRARY_TYPE} 
+  ${SRC_FILES}
+)
+
+parseDependencies(DEPENDENCIES_LIST penf%penf.mod)
+
+if (NOT PENF_FOUND)
+  if (NOT TARGET EXT_penf)
+    include(external_penf)
+    add_dependencies (${LIBRARY_NAME} EXT_penf)
+  endif (NOT TARGET EXT_penf)
+endif (NOT PENF_FOUND)
+
+set(include_directories_list ${include_directories_list} "${PENF_INCLUDE_DIR}" CACHE INTERNAL "List of include directories")
+set(target_link_libraries_list ${target_link_libraries_list} "${PENF_LIBRARIES}"  CACHE INTERNAL "List of libraries to be linked")
+
+# Link the library
+target_link_libraries ( 
+  ${LIBRARY_NAME} 
+  ${target_link_libraries_list}
+)
+
+include_directories( ${include_directories_list})
+
+# install library
+install(
+  TARGETS ${LIBRARY_NAME} 
+  ARCHIVE DESTINATION ${CMAKE_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_LIBDIR}
+)
+
+# install header (*mod) files
+install(
+  DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}/ 
+  DESTINATION ${CMAKE_INCLUDEDIR}
+)
+
+# configure a number version file to pass some of the CMake settings
+# to the source code
+configure_file(
+  $ENV{CMAKE_MACROS}/pkg-config.pc.cmake
+  ${CMAKE_CURRENT_SOURCE_DIR}/${LIBRARY_NAME}.pc
+  @ONLY
+)
+
+# install configuration file
+install(
+  FILES ${CMAKE_CURRENT_SOURCE_DIR}/${LIBRARY_NAME}.pc
+  DESTINATION ${CMAKE_LIBDIR}/pkgconfig
+  )
+
+set_target_properties(
+  ${LIBRARY_NAME}
+  PROPERTIES COMPILE_FLAGS "${Fortran_FLAGS} ${CMAKE_Fortran_COMPILER_FLAGS}"
+  )
+
+set ( FPL_INCLUDE_DIR "${CMAKE_INCLUDEDIR}" CACHE INTERNAL "fpl include directory" )
+set ( FPL_LIBRARIES_DIR "${CMAKE_LIBDIR}" CACHE INTERNAL "fpl library directory" )
+set ( FPL_LIBRARIES "${LIBRARY_NAME}" CACHE INTERNAL "fpl library" )

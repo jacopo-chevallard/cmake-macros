@@ -7,6 +7,7 @@ set (Dependencies_astrofortran
   fruit%fruit.mod
   fover%fover.mod
   fftw3%fftw3.f03
+  jsonfortran%json_module.mod
   fpl%fpl.mod
   lapack
   blas
@@ -21,6 +22,7 @@ set (Dependencies_names_astrofortran
   fruit
   fover
   fftw3
+  jsonfortran
   fpl
   lapack
   blas

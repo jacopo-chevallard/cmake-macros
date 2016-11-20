@@ -7,6 +7,7 @@ set (Dependencies_astrofortran
   fruit%fruit.mod
   fover%fover.mod
   fftw3%fftw3.f03
+  fpl%fpl.mod
   openblas
   )
 
@@ -19,6 +20,7 @@ set (Dependencies_names_astrofortran
   fruit
   fover
   fftw3
+  fpl
   openblas
   )
 

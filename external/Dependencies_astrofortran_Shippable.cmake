@@ -22,7 +22,6 @@ set (Dependencies_names_astrofortran
   fparser
   penf
   befor64
-  stringifor
   fruit
   fover
   fftw3

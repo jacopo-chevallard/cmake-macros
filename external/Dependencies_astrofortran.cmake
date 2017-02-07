@@ -5,7 +5,6 @@ set (Dependencies_astrofortran
   fparser%fparser.mod
   penf%penf.mod
   befor64%befor64.mod
-  stringifor%stringifor.mod
   fruit%fruit.mod
   fover%fover.mod
   fftw3%fftw3.f03
@@ -21,7 +20,6 @@ set (Dependencies_names_astrofortran
   fparser
   penf
   befor64
-  stringifor
   fruit
   fover
   fftw3

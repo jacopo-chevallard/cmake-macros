@@ -37,19 +37,21 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
 
 # Source files used to build the library
 set ( SRC_FILES 
-  chaext.f filter_n.f largo.f sort2.f trapz1.f linear.f iplace.f
-	rminim.f rmaxim.f percent.f rf_color.f name_sed.f gw_indices.f
-	irec_check.f gw_ix_sed.f gw_ix_sed_lick_system.f clyman.f ymag2.f
-	b912.f b4000.f ew_balmer.f file_header.f dattim.f t.f
-	zx.f locate.f trapz2.f trapz3.f trapz_lr.f gaussian_v_disp.f
-	gauss.f chabimf.f gw_etal_dat.f gw_thesis_dat.f gc_d4000.f
-	sfr.f sfr_0_b.f expand_time_steps.f convolve_new.f copyright.f
-	usrsfr.f xreverse.f sort.f trapez.f delete_files.f
-	gal_mass.f sdss_color.f read_ised.f nread.f evol_ised.f
-	ke_2filt_correction.f dismod.f midpnt.f dl.f fmag.f cosmol_c.f
-	lick_system.f degrade_resolution.f trapzq.f usort.f smthpl.f
-	bh_ix_sed.f degrade_to_constant_resolution.f sigma_indous.f
-	fwhm_lick_ids.f chelium.f pgas.f nargu.f ke_nfilt_correction.f
+  src/chaext.f src/filter_n.f src/largo.f src/sort2.f src/trapz1.f src/linear.f src/iplace.f 
+ src/rminim.f src/rmaxim.f src/percent.f src/rf_color.f src/name_sed.f src/gw_indices.f 
+ src/irec_check.f src/gw_ix_sed.f src/gw_ix_sed_lick_system.f src/clyman.f src/ymag2.f 
+ src/b912.f src/b4000.f src/ew_balmer.f src/file_header.f src/dattim.f src/t.f 
+ src/zx.f src/locate.f src/trapz2.f src/trapz3.f src/trapz_lr.f src/gaussian_v_disp.f 
+ src/gauss.f src/chabimf.f src/gw_etal_dat.f src/gw_thesis_dat.f src/gc_d4000.f 
+ src/sfr.f src/sfr_0_b.f src/expand_time_steps.f src/convolve_new.f src/copyright.f 
+ src/usrsfr.f src/xreverse.f src/sort.f src/trapez.f src/delete_files.f 
+ src/gal_mass.f src/sdss_color.f src/read_ised.f src/nread.f src/evol_ised.f 
+ src/ke_2filt_correction.f src/dismod.f src/midpnt.f src/dl.f src/fmag.f src/cosmol_c.f 
+ src/lick_system.f src/degrade_resolution.f src/trapzq.f src/usort.f src/smthpl.f 
+ src/bh_ix_sed.f src/degrade_to_constant_resolution.f src/sigma_indous.f 
+ src/fwhm_lick_ids.f src/chelium.f src/pgas.f src/nargu.f src/ke_nfilt_correction.f 
+ src/mixfilenames.f src/file_w_ages.f src/no_bl.f src/interpolate_ssp.f src/s500.f 
+ src/intrp_ised.f
   )
 
 # Build the library
@@ -67,68 +69,22 @@ set ( BC03_UTILITIES_LIBRARIES "${LIBRARY_NAME}" CACHE INTERNAL "BC03_UTILITIES 
 
 include_directories ( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-add_executable( galaxevpl galaxevpl.f )
-target_link_libraries( galaxevpl ${LIBRARY_NAME} )
-
-add_executable( add_filters add_filters.f )
-target_link_libraries( add_filters ${LIBRARY_NAME} )
-
-add_executable( seefilter seefilter.f )
-target_link_libraries( seefilter ${LIBRARY_NAME} )
-
-add_executable( zeropoint zeropoint.f )
-target_link_libraries( zeropoint ${LIBRARY_NAME} )
-
-add_executable( csp_galaxev csp_galaxev.f )
-target_link_libraries( csp_galaxev ${LIBRARY_NAME} )
-
-add_executable( add_bursts add_bursts.f )
-target_link_libraries( add_bursts ${LIBRARY_NAME} )
-
-add_executable( vel_disp vel_disp.f )
-target_link_libraries( vel_disp ${LIBRARY_NAME} )
-
-add_executable( downgrade_resolution downgrade_resolution.f )
-target_link_libraries( downgrade_resolution ${LIBRARY_NAME} )
-
-add_executable( ascii_ised ascii_ised.f )
-target_link_libraries( ascii_ised ${LIBRARY_NAME} )
-
-add_executable( bin_ised bin_ised.f )
-target_link_libraries( bin_ised ${LIBRARY_NAME} )
-
-add_executable( cm_evolution cm_evolution.f )
-target_link_libraries( cm_evolution ${LIBRARY_NAME} )
-
-add_executable( mm_evolution mm_evolution.f )
-target_link_libraries( mm_evolution ${LIBRARY_NAME} )
-
-add_executable( zmag zmag.f )
-target_link_libraries( zmag ${LIBRARY_NAME} )
-
-add_executable( add_noise add_noise.f )
-target_link_libraries( add_noise ${LIBRARY_NAME} )
-
-set ( EXECUTABLES_NAME 
-  galaxevpl
-  add_filters
-  seefilter
-  zeropoint
-  csp_galaxev
-  add_bursts
-  vel_disp
-  downgrade_resolution
-  ascii_ised
-  bin_ised
-  cm_evolution
-  mm_evolution
-  zmag
-  add_noise
+set(EXEC_LIST 
+  add_filters seefilter sun_color galaxevpl zeropoint csp_galaxev add_bursts
+  vel_disp downgrade_resolution ascii_ised bin_ised cm_evolution flux_evolution mm_evolution
+  zmag interpolate_ised 
   )
+
+foreach (exec ${EXEC_LIST})
+
+  add_executable(${exec} src/${exec}.f)
+  target_link_libraries(${exec} ${LIBRARY_NAME})
+
+endforeach (exec)
 
 # Install the library and *mod (header) files
 install(
-  TARGETS ${LIBRARY_NAME} ${EXECUTABLES_NAME}
+  TARGETS ${LIBRARY_NAME} ${EXEC_LIST}
   ARCHIVE DESTINATION  ${CMAKE_LIBDIR}
   LIBRARY DESTINATION  ${CMAKE_LIBDIR}
   RUNTIME DESTINATION  ${CMAKE_BINDIR}

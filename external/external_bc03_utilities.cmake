@@ -11,7 +11,7 @@ set (BC03_UTILITIES_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${BC03_UTIL
 
 # You need to pass fixed format flags
 if ( CMAKE_Fortran_COMPILER_ID STREQUAL GNU )
-  set ( CMAKE_Local_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -ffixed-line-length-none" )
+  set ( CMAKE_Local_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -std=legacy -ffixed-line-length-none" )
 elseif( CMAKE_Fortran_COMPILER_ID STREQUAL Intel )
   set ( CMAKE_Local_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fixed -extend-source" )
 endif ( CMAKE_Fortran_COMPILER_ID STREQUAL GNU )

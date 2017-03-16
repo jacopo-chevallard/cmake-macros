@@ -37,21 +37,21 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod_files)
 
 # Source files used to build the library
 set ( SRC_FILES 
-  src/chaext.f src/filter_n.f src/largo.f src/sort2.f src/trapz1.f src/linear.f src/iplace.f 
- src/rminim.f src/rmaxim.f src/percent.f src/rf_color.f src/name_sed.f src/gw_indices.f 
- src/irec_check.f src/gw_ix_sed.f src/gw_ix_sed_lick_system.f src/clyman.f src/ymag2.f 
- src/b912.f src/b4000.f src/ew_balmer.f src/file_header.f src/dattim.f src/t.f 
- src/zx.f src/locate.f src/trapz2.f src/trapz3.f src/trapz_lr.f src/gaussian_v_disp.f 
- src/gauss.f src/chabimf.f src/gw_etal_dat.f src/gw_thesis_dat.f src/gc_d4000.f 
- src/sfr.f src/sfr_0_b.f src/expand_time_steps.f src/convolve_new.f src/copyright.f 
- src/usrsfr.f src/xreverse.f src/sort.f src/trapez.f src/delete_files.f 
- src/gal_mass.f src/sdss_color.f src/read_ised.f src/nread.f src/evol_ised.f 
- src/ke_2filt_correction.f src/dismod.f src/midpnt.f src/dl.f src/fmag.f src/cosmol_c.f 
- src/lick_system.f src/degrade_resolution.f src/trapzq.f src/usort.f src/smthpl.f 
- src/bh_ix_sed.f src/degrade_to_constant_resolution.f src/sigma_indous.f 
- src/fwhm_lick_ids.f src/chelium.f src/pgas.f src/nargu.f src/ke_nfilt_correction.f 
- src/mixfilenames.f src/file_w_ages.f src/no_bl.f src/interpolate_ssp.f src/s500.f 
- src/intrp_ised.f
+  src/chaext.f90 src/filter_n.f90 src/largo.f90 src/sort2.f90 src/trapz1.f90 src/linear.f90 src/iplace.f90 
+ src/rminim.f90 src/rmaxim.f90 src/percent.f90 src/rf_color.f90 src/name_sed.f90 src/gw_indices.f90 
+ src/irec_check.f90 src/gw_ix_sed.f90 src/gw_ix_sed_lick_system.f90 src/clyman.f90 src/ymag2.f90 
+ src/b912.f90 src/b4000.f90 src/ew_balmer.f90 src/file_header.f90 src/dattim.f90 src/t.f90 
+ src/zx.f90 src/locate.f90 src/trapz2.f90 src/trapz3.f90 src/trapz_lr.f90 src/gaussian_v_disp.f90 
+ src/gauss.f90 src/chabimf.f90 src/gw_etal_dat.f90 src/gw_thesis_dat.f90 src/gc_d4000.f90 
+ src/sfr.f90 src/sfr_0_b.f90 src/expand_time_steps.f90 src/convolve_new.f90 src/copyright.f90 
+ src/usrsfr.f90 src/xreverse.f90 src/sort.f90 src/trapez.f90 src/delete_files.f90 
+ src/gal_mass.f90 src/sdss_color.f90 src/read_ised.f90 src/nread.f90 src/evol_ised.f90 
+ src/ke_2filt_correction.f90 src/dismod.f90 src/midpnt.f90 src/dl.f90 src/fmag.f90 src/cosmol_c.f90 
+ src/lick_system.f90 src/degrade_resolution.f90 src/trapzq.f90 src/usort.f90 src/smthpl.f90 
+ src/bh_ix_sed.f90 src/degrade_to_constant_resolution.f90 src/sigma_indous.f90 
+ src/fwhm_lick_ids.f90 src/chelium.f90 src/pgas.f90 src/nargu.f90 src/ke_nfilt_correction.f90 
+ src/mixfilenames.f90 src/file_w_ages.f90 src/no_bl.f90 src/interpolate_ssp.f90 src/s500.f90 
+ src/intrp_ised.f90
   )
 
 # Build the library
@@ -77,7 +77,7 @@ set(EXEC_LIST
 
 foreach (exec ${EXEC_LIST})
 
-  add_executable(${exec} src/${exec}.f)
+  add_executable(${exec} src/${exec}.f90)
   target_link_libraries(${exec} ${LIBRARY_NAME})
 
 endforeach (exec)

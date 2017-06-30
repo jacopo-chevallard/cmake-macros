@@ -7,6 +7,7 @@ set (Dependencies_astrofortran
   befor64%befor64.mod
   stringifor%stringifor.mod
   fruit%fruit.mod
+  fitter%fitter.mod
   fover%fover.mod
   fftw3%fftw3.f03
   jsonfortran%json_module.mod
@@ -23,6 +24,7 @@ set (Dependencies_names_astrofortran
   penf
   befor64
   fruit
+  fitter
   fover
   fftw3
   jsonfortran

@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.6)
 
 # Allows to set project version
 cmake_policy(SET CMP0048 NEW)
-project (fitter VERSION 0.1.0)
+project (fitter VERSION 0.1.1)
 
 # Which languages do we use
 enable_language (Fortran)

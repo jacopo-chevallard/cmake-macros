@@ -10,6 +10,7 @@ enable_language (Fortran)
 
 # Set the CMAKE_MODULE_PATH
 LIST (APPEND CMAKE_MODULE_PATH $ENV{CMAKE_MACROS})
+LIST (APPEND CMAKE_MODULE_PATH "$ENV{CMAKE_MACROS}/external")
 
 include(ExternalProject)
 include(libFindGeneral)

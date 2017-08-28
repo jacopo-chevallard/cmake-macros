@@ -87,8 +87,8 @@ if (NOT PENF_FOUND)
   endif (NOT TARGET EXT_penf)
 endif (NOT PENF_FOUND)
 
-set(include_directories_list ${include_directories_list} "${PENF_INCLUDE_DIR}" CACHE INTERNAL "List of include directories")
-set(target_link_libraries_list ${target_link_libraries_list} "${PENF_LIBRARIES}"  CACHE INTERNAL "List of libraries to be linked")
+set(include_directories_list ${include_directories_list} "${PENF_INCLUDE_DIR}")
+set(target_link_libraries_list ${target_link_libraries_list} "${PENF_LIBRARIES}")
 
 # Link the library
 target_link_libraries ( 

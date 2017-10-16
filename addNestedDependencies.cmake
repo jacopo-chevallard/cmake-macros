@@ -5,6 +5,8 @@ function (addNestedIncludeDirectories dependency_name include_directories_list)
   string(REPLACE "%" ";" dependency ${dependency_name})
   list(GET dependency 0 dependency_lib_name)
 
+  include(Dependencies_${dependency_lib_name}${SHIPPABLE_SUFFIX} OPTIONAL RESULT_VARIABLE NESTED_DEPENDENCIES)
+
   if (NESTED_DEPENDENCIES)
 
     set(include_directories_local "${include_directories_list}")

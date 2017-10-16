@@ -28,7 +28,7 @@ function (addNestedIncludeDirectories dependency_name include_directories_list)
       #MESSAGE(STATUS "dependency function: ${sub_dependency}")
 
       # Library name
-      addNestedDependencies(${sub_dependency} "${target_link_libraries_local}" "${include_directories_local}")
+      addNestedIncludeDirectories(${sub_dependency} "${include_directories_local}")
       getDependencyPath(${sub_dependency})
       #set (LIB_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${dependency})
       #set (LIB_NAME "${CMAKE_INSTALL_PREFIX}/lib/${CMAKE_LIBRARY_PREFIX}${dependency}${CMAKE_LIBRARY_SUFFIX}")

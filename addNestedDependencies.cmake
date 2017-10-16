@@ -1,6 +1,6 @@
 include(getDependencyPath)
 
-function (addNestedDependencies dependency_name target_link_libraries_list include_directories_list)
+function (addNestedIncludeDirectories dependency_name include_directories_list)
 
   string(REPLACE "%" ";" dependency ${dependency_name})
   list(GET dependency 0 dependency_lib_name)
@@ -17,7 +17,7 @@ function (addNestedDependencies dependency_name target_link_libraries_list inclu
 
   if (NESTED_DEPENDENCIES)
 
-    set(target_link_libraries_local "${target_link_libraries_list}")
+    #set(target_link_libraries_local "${target_link_libraries_list}")
     set(include_directories_local "${include_directories_list}")
 
     foreach (sub_dependency ${Dependencies_${dependency_lib_name}})
@@ -35,12 +35,12 @@ function (addNestedDependencies dependency_name target_link_libraries_list inclu
 
       string(TOUPPER ${sub_dependency_lib_name} tmp)
       set(include_directories_local ${include_directories_local} "${${tmp}_INCLUDE_DIR}")
-      set(target_link_libraries_local ${target_link_libraries_local} "${${tmp}_LIBRARIES}")
+      #set(target_link_libraries_local ${target_link_libraries_local} "${${tmp}_LIBRARIES}")
 
     endforeach(sub_dependency)
 
     set(include_directories_list ${include_directories_local} PARENT_SCOPE)
-    set(target_link_libraries_list ${target_link_libraries_local} PARENT_SCOPE)
+    #set(target_link_libraries_list ${target_link_libraries_local} PARENT_SCOPE)
 
   ENDif (NESTED_DEPENDENCIES)
 

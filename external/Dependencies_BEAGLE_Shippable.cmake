@@ -3,6 +3,7 @@ set (Dependencies_BEAGLE
   bc03_utilities
   flap%flap.mod
   mcfor%prosit.mod
+  fruit
 )
 
 set (Dependencies_names_BEAGLE
@@ -10,5 +11,6 @@ set (Dependencies_names_BEAGLE
   bc03_utilities
   flap
   mcfor
+  fruit
 )
 

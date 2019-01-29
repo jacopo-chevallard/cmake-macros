@@ -4,6 +4,7 @@ set (Dependencies_BEAGLE
   flap%flap.mod
   astrofortran%lib_checking.mod
   mcfor%prosit.mod
+  fruit
 )
 
 set (Dependencies_names_BEAGLE
@@ -12,5 +13,6 @@ set (Dependencies_names_BEAGLE
   flap
   mcfor
   astrofortran
+  fruit
 )
 

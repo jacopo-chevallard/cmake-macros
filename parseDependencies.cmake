@@ -54,9 +54,6 @@ function (find_dependencies)
 
     string(TOUPPER ${dependency_name} tmp)
 
-    MESSAGE(STATUS "")
-    MESSAGE(STATUS "dependency_name: " ${dependency_name})
-
     # Try to find the above libraries
     if (${len} STREQUAL "1")
       libfind_detect (${tmp} 

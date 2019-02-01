@@ -78,7 +78,7 @@ add_library(
   ${SRC_FILES}
 )
 
-parseDependencies(DEPENDENCIES_LIST penf%penf.mod)
+find_dependencies(DEPENDENCIES_LIST penf%penf.mod)
 
 if (NOT PENF_FOUND)
   if (NOT TARGET EXT_penf)

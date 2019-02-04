@@ -127,7 +127,7 @@ install(
 
 set_target_properties(
   ${LIBRARY_NAME}
-  PROPERTIES COMPILE_FLAGS "${Fortran_FLAGS} ${CMAKE_Fortran_COMPILER_FLAGS}"
+  PROPERTIES COMPILE_FLAGS "${CMAKE_Fortran_COMPILER_FLAGS} ${Fortran_FLAGS}"
   )
 
 set ( FPL_INCLUDE_DIR "${CMAKE_INCLUDEDIR}" CACHE INTERNAL "fpl include directory" )

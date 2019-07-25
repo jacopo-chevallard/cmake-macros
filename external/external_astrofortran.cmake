@@ -9,7 +9,7 @@ set(ASTROFORTRAN_LIBRARY_NAME astrofortran)
 set (ASTROFORTRAN_CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 set (ASTROFORTRAN_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${ASTROFORTRAN_LIBRARY_NAME})
 
-if (SHIPPABLE)
+if (SHIPPABLE AND NOT USE_HTTPS)
   set (GIT_ASTROFORTRAN "git@github.com:jacopo-chevallard/astrofortran.git")
 else (SHIPPABLE)
   set (GIT_ASTROFORTRAN "https://github.com/jacopo-chevallard/astrofortran.git")

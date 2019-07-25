@@ -10,7 +10,7 @@ set (FITTER_LIBRARY_NAME fitter)
 set (FITTER_CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 set (FITTER_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${FITTER_LIBRARY_NAME})
 
-if (SHIPPABLE)
+if (SHIPPABLE AND NOT USE_HTTPS)
   set (GIT_FITTER "git@github.com:jacopo-chevallard/FITTER.git")
 else (SHIPPABLE)
   set (GIT_FITTER "https://github.com/jacopo-chevallard/FITTER.git")

@@ -9,7 +9,7 @@ set (MCFOR_LIBRARY_NAME mcfor)
 set (MCFOR_CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 set (MCFOR_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${MCFOR_LIBRARY_NAME})
 
-if (SHIPPABLE)
+if (SHIPPABLE AND NOT USE_HTTPS)
   set (GIT_MCFOR "git@github.com:jacopo-chevallard/mcfor.git")
 else (SHIPPABLE)
   set (GIT_MCFOR "https://github.com/jacopo-chevallard/mcfor.git")

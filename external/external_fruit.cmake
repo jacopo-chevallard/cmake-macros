@@ -11,11 +11,7 @@ set(FRUIT_LIBRARY_NAME fruit)
 set (FRUIT_CMAKE_LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 set (FRUIT_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${FRUIT_LIBRARY_NAME})
 
-if (SHIPPABLE AND NOT USE_HTTPS)
-  set (GIT_FRUIT "git@github.com:jacopo-chevallard/FRUIT.git")
-else (SHIPPABLE)
-  set (GIT_FRUIT "https://github.com/jacopo-chevallard/FRUIT.git")
-endif(SHIPPABLE)
+set (GIT_FRUIT "https://github.com/jacopo-chevallard/FRUIT.git")
 
 if (fruit_version)
 

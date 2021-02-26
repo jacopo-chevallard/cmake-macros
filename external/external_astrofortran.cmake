@@ -11,9 +11,7 @@ set (ASTROFORTRAN_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${ASTROFORTRA
 
 if (JFROG)
   set (GIT_ASTROFORTRAN "https://${JFROG_TOKEN}:x-oauth-basic@github.com/jacopo-chevallard/astrofortran.git")
-elseif (SHIPPABLE AND NOT USE_HTTPS)
-  set (GIT_ASTROFORTRAN "git@github.com:jacopo-chevallard/astrofortran.git")
-else (SHIPPABLE)
+else ()
   set (GIT_ASTROFORTRAN "https://github.com/jacopo-chevallard/astrofortran.git")
 endif()
 

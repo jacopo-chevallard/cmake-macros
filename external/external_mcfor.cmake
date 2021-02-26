@@ -11,9 +11,7 @@ set (MCFOR_CMAKE_INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${MCFOR_LIBRARY_NAME
 
 if (JFROG)
   set (GIT_MCFOR "https://${JFROG_TOKEN}:x-oauth-basic@github.com/jacopo-chevallard/mcfor.git")
-elseif (SHIPPABLE AND NOT USE_HTTPS)
-  set (GIT_MCFOR "git@github.com:jacopo-chevallard/mcfor.git")
-else (SHIPPABLE)
+else ()
   set (GIT_MCFOR "https://github.com/jacopo-chevallard/mcfor.git")
 endif()
 
